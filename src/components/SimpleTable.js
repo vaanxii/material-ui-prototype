@@ -8,6 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+const axios = require("axios").default;
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -28,16 +30,31 @@ const rows = [
 
 export default function SimpleTable() {
   const classes = useStyles();
-  const [list, setList] = useState(rows);
+  const [list, setList] = useState([]);
 
   useEffect(() => {
     // async axios GET implementation here
-    const newRows = [...list];
-
-    newRows.push(createData("Yum Yum Yum", 50, 50, 1.1));
-
-    setList(newRows);
-  });
+    // const GetData = async () => {
+    //   const result = await axios.get("/api/v1/sample-data");
+    //   console.log(result);
+    //   //setList(result.data);
+    // };
+    // GetData();
+    // axios
+    //   .get("/api/v1/sample-data")
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })
+    //   .then(function () {
+    //     // always executed
+    //   });
+    // const newRows = [...list];
+    // newRows.push(createData("Yum Yum Yum", 50, 50, 1.1));
+    // setList(newRows);
+  }, []);
 
   return (
     <TableContainer component={Paper}>
@@ -52,7 +69,7 @@ export default function SimpleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.slice(2, 6).map((row) => (
+          {list.map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
