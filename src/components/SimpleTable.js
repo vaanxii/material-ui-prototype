@@ -34,23 +34,13 @@ export default function SimpleTable() {
 
   useEffect(() => {
     // async axios GET implementation here
-    // const GetData = async () => {
-    //   const result = await axios.get("/api/v1/sample-data");
-    //   console.log(result);
-    //   //setList(result.data);
-    // };
-    // GetData();
-    // axios
-    //   .get("/api/v1/sample-data")
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   })
-    //   .then(function () {
-    //     // always executed
-    //   });
+    const GetData = async () => {
+      const result = await axios.get("/api/v1/sample-data");
+      //console.log(result);
+      setList(result.data);
+    };
+    GetData();
+
     // const newRows = [...list];
     // newRows.push(createData("Yum Yum Yum", 50, 50, 1.1));
     // setList(newRows);
@@ -69,7 +59,7 @@ export default function SimpleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.map((row) => (
+          {list.slice(1, 2).map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
