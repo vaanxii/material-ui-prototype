@@ -37,6 +37,7 @@ export default function SimpleTable() {
     const GetData = async () => {
       const result = await axios.get("/api/v1/sample-data");
       //console.log(result);
+
       setList(result.data);
     };
     GetData();
@@ -56,10 +57,18 @@ export default function SimpleTable() {
             <TableCell align="right">Fat&nbsp;(g)</TableCell>
             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
             <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="right">Index 0 - Code</TableCell>
+            <TableCell align="right">typeof&nbsp;(roles[0])</TableCell>
+            <TableCell align="right">typeof&nbsp;(roles)</TableCell>
+            <TableCell align="right">wala - Defined?</TableCell>
+            <TableCell align="right">id - Defined?</TableCell>
+            <TableCell align="right">Index 0 - Code</TableCell>
+            <TableCell align="right">Role(s) ID and Code</TableCell>
+            <TableCell align="right">Is it delicious?</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.slice(1, 2).map((row) => (
+          {list.slice(1, 7).map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
@@ -68,6 +77,28 @@ export default function SimpleTable() {
               <TableCell align="right">{row.fat}</TableCell>
               <TableCell align="right">{row.carbs}</TableCell>
               <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.roles[0].code}</TableCell>
+              <TableCell align="right">{typeof row.roles[0]}</TableCell>
+              <TableCell align="right">{typeof row.roles}</TableCell>
+              <TableCell align="right">
+                {row.roles[0].wala === undefined ? "undefined" : "defined"}
+              </TableCell>
+              <TableCell align="right">
+                {row.roles[0].id === undefined ? "undefined" : "defined"}
+              </TableCell>
+              <TableCell align="right">
+                {row.roles.map((roleRow) => (
+                  <>
+                    <span key={roleRow.id}>
+                      {roleRow.id}&nbsp;and&nbsp;{roleRow.code}
+                    </span>
+                    <br />
+                  </>
+                ))}
+              </TableCell>
+              <TableCell align="right">
+                {row.delicious ? "Yes" : "No"}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
